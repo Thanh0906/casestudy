@@ -1,0 +1,1 @@
+Employee{Person{fullName='Thanh', birthday='12/12/1995', gender='Male', idCardNumber='12346587', phoneNumber='3123554564', email='thanh@gmail.com'}level='college', position='quản lí', salary=700.0}
