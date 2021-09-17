@@ -18,13 +18,13 @@ public class EmployeeServiceImpl implements IEmployeeService {
             System.out.println("Enter Name :");
             String fullName = scanner.nextLine();
             System.out.println("Enter birthday  :");
-            String birthday = Validation.inputBirthday();
+            String birthday = Validation.inputDay();
             System.out.println("Enter gender : 1. Male / 2. Female:");
             String gender = Validation.inputGender();
             System.out.println("Enter IdCardNumber:");
-            String idCardNumber = scanner.nextLine();
+            String idCardNumber = scanner.nextLine();//Validation.inputIdCardNumber();
             System.out.println("Enter phonenumber:");
-            String phoneNumber = scanner.nextLine();
+            String phoneNumber = Validation.inputNumberphone();
             System.out.println("Enter Email :");
             String email = Validation.inputEmail();
             System.out.println("Enter level :");
@@ -36,7 +36,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
             Employee employee = new Employee(fullName, birthday, gender, idCardNumber, phoneNumber,
                     email, level, position, salary);
             employeeList.add(employee);
-            ReadAndWrite.writeListEmployeeCSV(employeeList,"src\\casestudy\\data\\employee.csv",false);
+            ReadAndWrite.writeListEmployeeCSV(employeeList,"src\\casestudy\\data\\employee.csv",true);
             System.out.println("New more success ");
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -48,8 +48,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public void displayList()  {
         employeeList = ReadAndWrite.getListEmployeeFromCSV("src\\casestudy\\data\\employee.csv");
         System.out.println("List Employee");
-        for (int i = 0; i < employeeList.size(); i++) {
-            System.out.println(i + 1 + ". " + employeeList.get(i));
+        for (Employee employee:employeeList) {
+            System.out.println(employee.getToString());
         }
 
     }

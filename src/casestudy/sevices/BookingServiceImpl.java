@@ -2,22 +2,17 @@ package casestudy.sevices;
 
 import casestudy.model.Booking;
 import casestudy.model.Contract;
-import casestudy.model.person.Customer;
-import casestudy.utils.BookingComparator;
 import casestudy.utils.ReadAndWrite;
 import casestudy.utils.Validation;
-import jdk.nashorn.internal.IntDeque;
 
 import java.util.*;
 
 public class BookingServiceImpl implements IBookingService {
-
-
     static Scanner scanner = new Scanner(System.in);
-    static Set<Booking> listBooking = new TreeSet<>(new BookingComparator());
+    static Set<Booking> listBooking = new TreeSet<>();
     static Queue<Booking> queueBooking = new LinkedList<>();
 
-    //chưa xong
+
     @Override
     public void addList() {
         System.out.println("Enter idBokking");
@@ -43,7 +38,7 @@ public class BookingServiceImpl implements IBookingService {
         for (Booking listBooking1 : listBooking) {
             int count = 0;
             for (int i = 0; i < listContract.size(); i++) {
-                if (listContract.get(i).getIdBooking() == listBooking1.getIdBooking()) {
+                if (listContract.get(i).getIdBooking().equals(listBooking1.getIdBooking())) {
                     count++;
                 }
             }

@@ -25,7 +25,7 @@ public class CustomerServiceImpl implements ICustomerService {
             System.out.println("Enter IdCardNumber :");
             String idCardNumber =scanner.nextLine();
             System.out.println("Enter phonenumber");
-            String phoneNumber =scanner.nextLine();
+            String phoneNumber =Validation.inputNumberphone();
             System.out.println("Enter Email :");
             String email = Validation.inputEmail();
             System.out.println("Enter idCustomer");
@@ -36,7 +36,7 @@ public class CustomerServiceImpl implements ICustomerService {
             String addressCustomer = scanner.nextLine();
             Customer customer = new Customer(fullName,birthday,gender,idCardNumber,phoneNumber,email,idCustomer,customerType,addressCustomer);
             customerList.add(customer);
-            ReadAndWrite.writeListCustomerCSV(customerList,"src\\casestudy\\data\\customer.csv",false);
+            ReadAndWrite.writeListCustomerCSV(customerList,"src\\casestudy\\data\\customer.csv",true  );
             System.out.println("New more success ");
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +50,7 @@ public class CustomerServiceImpl implements ICustomerService {
         customerList =  ReadAndWrite.getListCustomerFromCSV("src\\casestudy\\data\\customer.csv");
         System.out.println("customerList");
         for (Customer customer :customerList){
-            System.out.println(customer.toString());
+            System.out.println(customer.getToSTring());
         }
 
     }
@@ -116,14 +116,15 @@ public class CustomerServiceImpl implements ICustomerService {
                         case 0:
                             break;
                         default:
-                            System.out.println("bạn đã nhập sai.Hãy nhập lại");
+                            System.out.println("Re-Enter");
                     }
                 }
 
             }
             if (!check){
-                System.out.println("ID đã tồn tại.vui lòng nhập lại");
+                System.out.println("Not number in list");
             }
+
 
         } catch (NumberFormatException e) {
             e.printStackTrace();

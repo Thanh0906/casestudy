@@ -19,9 +19,7 @@ public class FuramaController {
             System.out.println("5. Promotion Management ");
             System.out.println("6. Exit ");
             System.out.println("Enter your choice: ");
-
                 choice = Validation.inputNumber();
-
                 switch (choice) {
                     case 1:
                         EmployeeServiceImpl employeeService = new EmployeeServiceImpl();

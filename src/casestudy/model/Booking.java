@@ -1,5 +1,7 @@
 package casestudy.model;
 
+import com.sun.corba.se.impl.presentation.rmi.StubInvocationHandlerImpl;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -90,19 +92,21 @@ public class Booking implements Comparable<Booking>{
         LocalDate startDate2 =LocalDate.parse(o.getStartDate(),formatter);
         LocalDate endtDate1 =LocalDate.parse(this.getEndDate(),formatter);
         LocalDate endtDate2 =LocalDate.parse(o.getEndDate(),formatter);
-        if (startDate1.compareTo(startDate2)>0){
+        if(startDate1.compareTo(startDate2) > 0){
             return 1;
-        }else if (startDate1.compareTo(startDate2)<0){
-            return -1;
-        }else {
-            if (endtDate1.compareTo(endtDate2)>0){
+        }else if(startDate1.compareTo(startDate2) == 0){
+            if(endtDate1.compareTo(endtDate2) > 0){
                 return 1;
-            }else if (endtDate1.compareTo(endtDate2)<0){
-                return -1;
-            }else {
-                return 0;
             }
         }
+        return -1;
+    }
+
+
+
+    public String getToString(){
+        return  this.getIdBooking() + "," +this.getStartDate()+ ","+this.getEndDate() + ","
+                +this.getIdCustomer() + "," +this.getNameService() + ","+this.getIdService();
     }
 
 }

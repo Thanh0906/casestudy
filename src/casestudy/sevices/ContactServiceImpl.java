@@ -28,8 +28,8 @@ public class ContactServiceImpl implements IContactService {
             System.out.println("idCustomer");
             String idCustomer = BookingServiceImpl.queueBooking.peek().getIdCustomer();
             Contract contract = new Contract(numberContract,idBooking,deposit,totalPayment,idCustomer);
-           contractList.add(contract);
-            ReadAndWrite.writeListContractCSV(contractList,"src\\casestudy\\data\\contract.csv",false);
+            contractList.add(contract);
+            ReadAndWrite.writeListContractCSV(contractList,"src\\casestudy\\data\\contract.csv",true);
             queueBooking.remove();
             ReadAndWrite.writeQueueBookingCSV(queueBooking,"src\\casestudy\\data\\queueBooking.csv",false);
 

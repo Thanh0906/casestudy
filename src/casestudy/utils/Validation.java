@@ -1,5 +1,6 @@
 package casestudy.utils;
 
+import javax.print.DocFlavor;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ public class Validation {
         boolean check = true;
         while (check) {
             checkDay = scanner.nextLine();
-            if (!checkDay.matches("^\\d{2}[-|/]\\d{2}[-|/]\\d{4}")) {
+            if (!checkDay.matches("[0-9]{2}/[0-9]{2}/(19[0-9][0-9]|20[0-9][0-9])")) {
                 System.out.println("No matches.Re-Enter");
             } else {
                 check = false;
@@ -162,7 +163,7 @@ public class Validation {
                     boole = false;
                 } else {
                     System.out.println("No matches.Re-Enter ");
-                   ;
+
                 }
             } catch (Exception e) {
                 System.out.println("No matches .Re-Enter ");
@@ -175,6 +176,7 @@ public class Validation {
     }
 
     //định dạng nam sinnh
+
     public static String inputBirthday() {
         String birthday = "";
         boolean boole = true;
@@ -182,8 +184,7 @@ public class Validation {
             birthday = inputDay();
             String[] strings = birthday.split("/");
             LocalDate localDate = LocalDate.now();
-            int yearnow = localDate.getYear();
-            int age = yearnow - Integer.parseInt(strings[2]);
+            int age = localDate.getYear() - Integer.parseInt(strings[2]);
             if (age < 18) {
                 System.out.println("nho hon 18.  Re-enter");
 
@@ -254,7 +255,7 @@ public class Validation {
         return level;
     }
     public static String inputcustomerType(){
-        int choiceCostomerType =    inputNumber();
+        int choiceCostomerType = inputNumber();
         String customerType = "";
         switch (choiceCostomerType) {
             case 1:
@@ -277,5 +278,20 @@ public class Validation {
         }
         return customerType;
     }
+    public static  String inputNumberphone(){
+        boolean boole = true;
+        String numberPhone = "";
+        while (boole) {
+            numberPhone = scanner.nextLine();
+            if (numberPhone.matches("^(09|03|07|08|05)+[0-9]{8}$")) {
+                boole = false;
+            } else {
+                System.out.println("No matches.Re-Enter ");
+
+            }
+        }
+        return numberPhone;
+    }
+
 }
 

@@ -27,4 +27,7 @@ public class Room extends Facility {
                 "freeService='" + freeService + '\'' +
                 '}';
     }
+    public String getToString(){
+        return this.getIdService()+","+this.getNameService()+","+this.getUseArea()+","+this.getRentalCosts() +","+this.getNumberPeople()+","+this.getStyleRental() +","+this.getFreeService();
+    }
 }

@@ -22,6 +22,7 @@ public class ReadAndWrite {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (String line: string){
                 bufferedWriter.write(line);
+                bufferedWriter.newLine();
             }
             bufferedWriter.close();
         } catch (IOException e) {
@@ -33,35 +34,35 @@ public class ReadAndWrite {
     public static void writeListEmployeeCSV(List<Employee> list, String path, boolean append){
         List<String> stringList =new ArrayList<>();
         for (Employee employee : list){
-            stringList.add(employee.toString());
+            stringList.add(employee.getToString());
         }
         writeListStringToCSV(stringList,path,append);
     }
     public static void writeListCustomerCSV(List<Customer> list, String path, boolean append){
         List<String> stringList =new ArrayList<>();
         for (Customer cusList : list){
-            stringList.add(cusList.toString());
+            stringList.add(cusList.getToSTring());
         }
         writeListStringToCSV(stringList,path,append);
     }
     public static void writeListHouseCSV(List<House> list, String path, boolean append){
         List<String> stringList =new ArrayList<>();
         for (House house : list){
-            stringList.add(house.toString());
+            stringList.add(house.getToString());
         }
         writeListStringToCSV(stringList,path,append);
     }
     public static void writeListRoomCSV(List<Room> list, String path, boolean append){
         List<String> stringList =new ArrayList<>();
         for (Room room : list){
-            stringList.add(room.toString());
+            stringList.add(room.getToString());
         }
         writeListStringToCSV(stringList,path,append);
     }
     public static void writeListVillaCSV(List<Villa> list, String path, boolean append){
         List<String> stringList =new ArrayList<>();
         for (Villa villa : list){
-            stringList.add(villa.toString());
+            stringList.add(villa.getToString());
         }
         writeListStringToCSV(stringList,path,append);
     }
@@ -77,21 +78,21 @@ public class ReadAndWrite {
     public static  void writeListBookingCSV(Set<Booking> list, String path, boolean append){
         List<String> stringList =new ArrayList<>();
         for (Booking booking : list){
-            stringList.add(booking.toString());
+            stringList.add(booking.getToString());
         }
         writeListStringToCSV(stringList,path,append);
     }
     public static void writeQueueBookingCSV(Queue<Booking> list, String path, boolean append){
         List<String> stringList =new ArrayList<>();
         for (Booking booking : list){
-            stringList.add(booking.toString());
+            stringList.add(booking.getToString());
         }
         writeListStringToCSV(stringList,path,append);
     }
     public static void writeListContractCSV(List<Contract> list, String path, boolean append){
         List<String> stringList =new ArrayList<>();
         for (Contract contract : list){
-            stringList.add(contract.toString());
+            stringList.add(contract.getToString());
         }
         writeListStringToCSV(stringList,path,append);
     }
@@ -118,8 +119,8 @@ public class ReadAndWrite {
         List<String> stringList =readCSV(path);
         for (String line : stringList){
             String[] array = line.split(",");
-            Employee employee = new Employee(array[1],array[2],array[3],(array[4]),
-                    (array[5]),array[6],array[0],array[7],Double.parseDouble(array[8]));
+            Employee employee = new Employee(array[0],array[1],array[2],array[3],(array[4]),
+                    (array[5]),array[6],array[7],Double.parseDouble(array[8]));
             employees.add(employee);
         }
         return employees;
@@ -129,7 +130,6 @@ public class ReadAndWrite {
         List<String> stringList =readCSV(path);
         for (String line : stringList){
             String[] array = line.split(",");
-
             Customer customer = new Customer(array[0],array[1],array[2],array[3],
                     array[4],array[5],array[6],array[7],array[8]);
             customers.add(customer);

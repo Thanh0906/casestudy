@@ -70,4 +70,7 @@ public class Contract {
                 ", idCustomer='" + idCustomer + '\'' +
                 '}';
     }
+    public String getToString(){
+        return this.getNumberContract() + "," +this.getIdBooking()+ "," +this.getDeposit() + ","+this.getTotalPayment()+ ","+ this.getIdCustomer();
+    }
 }

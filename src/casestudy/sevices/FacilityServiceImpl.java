@@ -105,9 +105,9 @@ public class FacilityServiceImpl implements IFacilityService {
                     styleRental,roomStandard,poolArea,numberFloors);
             List<Villa> villaList = new ArrayList<>();
             villaList.add(villa);
-            ReadAndWrite.writeListVillaCSV( villaList ,"src\\casestudy\\data\\facility\\villa.csv",false);
+            ReadAndWrite.writeListVillaCSV( villaList ,"src\\casestudy\\data\\facility\\villa.csv",true);
             facilityIntegerMap.put(villa,0);
-            ReadAndWrite.writeListFacilituCSV(facilityIntegerMap,"src\\casestudy\\data\\facility\\facilityMaintenance.csv",false);
+            ReadAndWrite.writeListFacilituCSV(facilityIntegerMap,"src\\casestudy\\data\\facility\\facilityMaintenance.csv",true);
             System.out.println("New more success");
         } catch (Exception e) {
             e.printStackTrace();
@@ -150,17 +150,15 @@ public class FacilityServiceImpl implements IFacilityService {
             House house = new House(idService,nameService,useArea,rentalCosts,numberPeople,styleRental,roomStandard,numberFloors);
             List<House> houses = new ArrayList< >();
             houses.add(house);
-            ReadAndWrite.writeListHouseCSV(houses,"src\\casestudy\\data\\facility\\room.csv",false);
+            ReadAndWrite.writeListHouseCSV(houses,"src\\src\\casestudy\\data\\facility\\house.csv",true);
             facilityIntegerMap.put(house, 0);
-            ReadAndWrite.writeListFacilituCSV(facilityIntegerMap,"src\\casestudy\\data\\facility\\facilityMaintenance.csv",false);
+            ReadAndWrite.writeListFacilituCSV(facilityIntegerMap,"src\\casestudy\\data\\facility\\facilityMaintenance.csv",true);
             System.out.println("New more success");
             } catch (Exception e) {
             e.printStackTrace();
         }
 
         }
-
-
 
     public void addNewRoom() {
         try {
@@ -195,16 +193,14 @@ public class FacilityServiceImpl implements IFacilityService {
             facilityIntegerMap.put(room, 0);
             List<Room> rooms = new ArrayList<>();
             rooms.add(room);
-            ReadAndWrite.writeListRoomCSV(rooms,"src\\casestudy\\data\\facility\\room.csv",false);
-            ReadAndWrite.writeListFacilituCSV(facilityIntegerMap,"src\\casestudy\\data\\facility\\facilityMaintenance.csv",false);
+            ReadAndWrite.writeListRoomCSV(rooms,"src\\casestudy\\data\\facility\\room.csv",true);
+            ReadAndWrite.writeListFacilituCSV(facilityIntegerMap,"src\\casestudy\\data\\facility\\facilityMaintenance.csv",true);
             System.out.println("New more success");
             } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-
-
 
     public void displayListForMaintenance() {
         List<String> listFacility = ReadAndWrite.readCSV("src\\casestudy\\data\\facility\\facilityMaintenance.csv");

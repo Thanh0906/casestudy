@@ -49,4 +49,8 @@ public class Customer extends Person {
                 ", addressCustomer='" + addressCustomer + '\'' +
                 '}';
     }
+    public String getToSTring(){
+        return this.getFullName() + ","+this.getBirthday() + ","+this.getGender() + "," +getIdCardNumber() +","+
+                this.getPhoneNumber() +","+getEmail() +"," +this.getIdCustomer() +","+this.getCustomerType() + ","+this.getAddressCustomer();
+    }
 }

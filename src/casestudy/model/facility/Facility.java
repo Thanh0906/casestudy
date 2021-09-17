@@ -80,4 +80,7 @@ public abstract  class Facility {
                 ", styleRental='" + styleRental + '\'' +
                 '}';
     }
+    public String getToString(){
+        return this.getIdService()+","+this.getNameService()+","+this.getUseArea()+","+this.getRentalCosts() +","+this.getNumberPeople()+","+this.getStyleRental();
+    }
 }
