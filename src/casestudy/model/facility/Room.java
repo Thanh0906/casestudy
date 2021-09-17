@@ -12,7 +12,6 @@ public class Room extends Facility {
         this.freeService = freeService;
     }
 
-
     public String getFreeService() {
         return freeService;
     }
@@ -28,6 +27,7 @@ public class Room extends Facility {
                 '}';
     }
     public String getToString(){
-        return this.getIdService()+","+this.getNameService()+","+this.getUseArea()+","+this.getRentalCosts() +","+this.getNumberPeople()+","+this.getStyleRental() +","+this.getFreeService();
+        return this.getIdService()+","+this.getNameService()+","+this.getUseArea()+","+this.getRentalCosts()
+                +","+this.getNumberPeople()+","+this.getStyleRental() +","+this.getFreeService();
     }
 }

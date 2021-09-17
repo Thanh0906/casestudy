@@ -69,8 +69,7 @@ public class ReadAndWrite {
     public static void writeListFacilituCSV(Map<Facility,Integer> list, String path, boolean append){
         List<String> stringList =new ArrayList<>();
         for (Facility facility : list.keySet()){
-            String key = facility.getIdService() +","+ facility.getNameService() + "," + list.get(facility);
-
+           String key = facility.getToString();
             stringList.add(key);
         }
         writeListStringToCSV(stringList,path,append);

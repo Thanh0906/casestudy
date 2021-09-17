@@ -13,7 +13,7 @@ public class Validation {
         boolean check = true;
         while (check) {
             checkDay = scanner.nextLine();
-            if (!checkDay.matches("[0-9]{2}/[0-9]{2}/(19[0-9][0-9]|20[0-9][0-9])")) {
+            if (!checkDay.matches("^[0-9]{2}/[0-9]{2}/(19[0-9][0-9]|20[0-9][0-9])$")) {
                 System.out.println("No matches.Re-Enter");
             } else {
                 check = false;
@@ -48,7 +48,7 @@ public class Validation {
         boolean check = true;
         while (check) {
             checkEmail = scanner.nextLine();
-            if (!checkEmail.matches("[a-zA-Z0-9]+@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)")) {
+            if (!checkEmail.matches("^[a-zA-Z0-9]+@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)$")) {
                 System.out.println("No matches.Re-Enter ");
             } else {
                 check = false;
@@ -62,7 +62,7 @@ public class Validation {
         String name = "";
         while (boole) {
             name = scanner.nextLine();
-            if (name.matches("^[A-Z][A-z]*")) {
+            if (name.matches("^[A-Z][A-z]$")) {
                 boole = false;
             } else {
                 System.out.println("No matches.Re-Enter  ");
@@ -126,12 +126,11 @@ public class Validation {
                 if (numberPeople > 0 && numberPeople < 20) {
                     boole = false;
                 } else {
-                    System.out.println("Not found  ");
+                    System.out.println("Not find  ");
                 }
 
             } catch (Exception e) {
                 System.out.println("No matches.Re-Enter ");
-
             }
         }
         return numberPeople;
@@ -166,7 +165,7 @@ public class Validation {
 
                 }
             } catch (Exception e) {
-                System.out.println("No matches .Re-Enter ");
+                System.out.println("No matches.Re-Enter ");
 
             }
 
@@ -176,7 +175,6 @@ public class Validation {
     }
 
     //định dạng nam sinnh
-
     public static String inputBirthday() {
         String birthday = "";
         boolean boole = true;
@@ -186,10 +184,10 @@ public class Validation {
             LocalDate localDate = LocalDate.now();
             int age = localDate.getYear() - Integer.parseInt(strings[2]);
             if (age < 18) {
-                System.out.println("nho hon 18.  Re-enter");
+                System.out.println("Less 18.Re-enter");
 
             } else if (age > 100) {
-                System.out.println("hơn 100.  Re-enter");
+                System.out.println("Than 100.Re-enter");
 
             } else {
                 boole = false;
@@ -287,7 +285,6 @@ public class Validation {
                 boole = false;
             } else {
                 System.out.println("No matches.Re-Enter ");
-
             }
         }
         return numberPhone;

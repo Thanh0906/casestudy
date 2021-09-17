@@ -37,7 +37,8 @@ public class House extends Facility {
                 '}';
     }
     public String getToString (){
-        return this.getIdService()+","+this.getNameService()+","+this.getUseArea()+","+this.getRentalCosts() +","+this.getNumberPeople()+","+this.getStyleRental()
+        return this.getIdService()+","+this.getNameService()+","+this.getUseArea()+","+this.getRentalCosts()
+                +","+this.getNumberPeople()+","+this.getStyleRental()+","
                 +this.getRoomStandard()+","+this.getNumberFloors();
     }
 }

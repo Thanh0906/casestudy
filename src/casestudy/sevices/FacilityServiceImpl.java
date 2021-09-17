@@ -7,15 +7,12 @@ import casestudy.model.facility.Room;
 import casestudy.model.facility.Villa;
 import casestudy.utils.ReadAndWrite;
 import casestudy.utils.Validation;
-
 import java.io.*;
 import java.util.*;
-
 public class FacilityServiceImpl implements IFacilityService {
     //hiển thị danh sách facility, thêm mới facility, hiển thị danh sách facility cần bảo trì.
     static Map<Facility, Integer> facilityIntegerMap = new LinkedHashMap<>();
     static Scanner scanner = new Scanner(System.in);
-
     @Override
     public void addList() {
             System.out.println("What do you want?");
@@ -40,11 +37,13 @@ public class FacilityServiceImpl implements IFacilityService {
                 default:
                     System.out.println("Error!!!");
             }
-
     }
-
     @Override
     public void displayList() {
+        List<String> listFacility = ReadAndWrite.readCSV("src\\casestudy\\data\\facility\\facilityMaintenance.csv");
+        for (int i=0;i<listFacility.size();i++){
+            System.out.println(listFacility.get(i));
+        }
         List<House> houses = ReadAndWrite.getListHouseFromCSV("src\\casestudy\\data\\facility\\house.csv");
         List<Room> rooms = ReadAndWrite.getListRoomFromCSV("src\\casestudy\\data\\facility\\room.csv");
         List<Villa> villas = ReadAndWrite.getListVilllaFromCSV("src\\casestudy\\data\\facility\\villa.csv");
@@ -60,14 +59,12 @@ public class FacilityServiceImpl implements IFacilityService {
         for (int i = 0; i < villas.size(); i++) {
             System.out.println(i + 1 + ". " + villas.get(i));
         }
+        System.out.println("All List");
 
     }
-
     @Override
     public void editList() {
-
     }
-
     public void addNewVilla() {
         try {
            Set<Facility> keySet = facilityIntegerMap.keySet();
@@ -79,7 +76,7 @@ public class FacilityServiceImpl implements IFacilityService {
                 flag = false;
                 for (Facility key : keySet) {
                     if (key.getIdService().equals(idService)) {
-                        System.out.println("Id service is exist, please enter again !");
+                        System.out.println("Id service is exist, Re-enter!");
                         flag = true;
                         break;
                     }
@@ -105,15 +102,13 @@ public class FacilityServiceImpl implements IFacilityService {
                     styleRental,roomStandard,poolArea,numberFloors);
             List<Villa> villaList = new ArrayList<>();
             villaList.add(villa);
-            ReadAndWrite.writeListVillaCSV( villaList ,"src\\casestudy\\data\\facility\\villa.csv",true);
+            ReadAndWrite.writeListVillaCSV( villaList ,"src\\casestudy\\data\\facility\\villa.csv",false);
             facilityIntegerMap.put(villa,0);
-            ReadAndWrite.writeListFacilituCSV(facilityIntegerMap,"src\\casestudy\\data\\facility\\facilityMaintenance.csv",true);
+            ReadAndWrite.writeListFacilituCSV(facilityIntegerMap,"src\\casestudy\\data\\facility\\facilityMaintenance.csv",false);
             System.out.println("New more success");
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
     public void addNewHouse() {
@@ -127,7 +122,7 @@ public class FacilityServiceImpl implements IFacilityService {
                 flag = false;
                 for (Facility key : keySet) {
                     if (key.getIdService().equals(idService)) {
-                        System.out.println("Id service is exist, please enter again !");
+                        System.out.println("Id service is exist, Re-enter !");
                         flag = true;
                         break;
                     }
@@ -150,16 +145,14 @@ public class FacilityServiceImpl implements IFacilityService {
             House house = new House(idService,nameService,useArea,rentalCosts,numberPeople,styleRental,roomStandard,numberFloors);
             List<House> houses = new ArrayList< >();
             houses.add(house);
-            ReadAndWrite.writeListHouseCSV(houses,"src\\src\\casestudy\\data\\facility\\house.csv",true);
+            ReadAndWrite.writeListHouseCSV(houses,"src\\casestudy\\data\\facility\\house.csv",false);
             facilityIntegerMap.put(house, 0);
-            ReadAndWrite.writeListFacilituCSV(facilityIntegerMap,"src\\casestudy\\data\\facility\\facilityMaintenance.csv",true);
+            ReadAndWrite.writeListFacilituCSV(facilityIntegerMap,"src\\casestudy\\data\\facility\\facilityMaintenance.csv",false);
             System.out.println("New more success");
             } catch (Exception e) {
             e.printStackTrace();
         }
-
         }
-
     public void addNewRoom() {
         try {
             Set<Facility> keySet = facilityIntegerMap.keySet();
@@ -171,7 +164,7 @@ public class FacilityServiceImpl implements IFacilityService {
                 flag = false;
                 for (Facility key : keySet) {
                     if (key.getIdService().equals(idService)) {
-                        System.out.println("Id service is exist, please enter again !");
+                        System.out.println("Id service is exist, Re-enter!");
                         flag = true;
                         break;
                     }
@@ -193,25 +186,23 @@ public class FacilityServiceImpl implements IFacilityService {
             facilityIntegerMap.put(room, 0);
             List<Room> rooms = new ArrayList<>();
             rooms.add(room);
-            ReadAndWrite.writeListRoomCSV(rooms,"src\\casestudy\\data\\facility\\room.csv",true);
-            ReadAndWrite.writeListFacilituCSV(facilityIntegerMap,"src\\casestudy\\data\\facility\\facilityMaintenance.csv",true);
+            ReadAndWrite.writeListRoomCSV(rooms,"src\\casestudy\\data\\facility\\room.csv",false);
+            ReadAndWrite.writeListFacilituCSV(facilityIntegerMap,"src\\casestudy\\data\\facility\\facilityMaintenance.csv",false);
             System.out.println("New more success");
             } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
     public void displayListForMaintenance() {
         List<String> listFacility = ReadAndWrite.readCSV("src\\casestudy\\data\\facility\\facilityMaintenance.csv");
-        System.out.println("List Facility Maintenance: ");
-        for (int i = 0; i < listFacility.size(); i++) {
-            String[] string = listFacility.get(i).split(",");
-            if(Integer.parseInt(string[2]) >5){
-                System.out.println(i + 1 + ". " + listFacility.get(i));
-            }
+                System.out.println("List Facility Maintenance: ");
+                for (int i = 0; i < listFacility.size(); i++) {
+                    String[] string = listFacility.get(i).split(",");
+                    if(Integer.parseInt(string[2]) >5){
+                        System.out.println(i + 1 + ". " + listFacility.get(i));
+                    }
 
-        }
+                }
     }
 
 }

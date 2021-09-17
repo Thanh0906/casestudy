@@ -53,13 +53,13 @@ public class ContactServiceImpl implements IContactService {
     @Override
     public void editList() {
         displayList();
-        boolean b2 = false;
-        while (b2){
+        boolean flag = false;
+        while (flag){
             System.out.println("Enter number Contract");
             int idContract =Validation.inputNumber();
             for (int i =0;i<contractList.size();i++){
                 if (idContract -1 ==i){
-                    b2 = true;
+                    flag = true;
                     System.out.println("What do you want to edit??");
                     System.out.println("1. Do you want to edit numberContract ");
                     System.out.println("2. Do you want to edit idBooking");
@@ -102,7 +102,7 @@ public class ContactServiceImpl implements IContactService {
                     }
 
                 }
-                if (!b2) {
+                if (!flag) {
                     System.out.println("id already exists.Please re-enter ");
                 }
             }

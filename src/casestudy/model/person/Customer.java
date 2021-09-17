@@ -50,7 +50,8 @@ public class Customer extends Person {
                 '}';
     }
     public String getToSTring(){
-        return this.getFullName() + ","+this.getBirthday() + ","+this.getGender() + "," +getIdCardNumber() +","+
-                this.getPhoneNumber() +","+getEmail() +"," +this.getIdCustomer() +","+this.getCustomerType() + ","+this.getAddressCustomer();
+        return this.getFullName() + "," + this.getBirthday() + "," + this.getGender() + "," +getIdCardNumber()
+                +"," + this.getPhoneNumber() +"," + this.getEmail() + "," +this.getIdCustomer() +"," +this.getCustomerType()
+                + ","+this.getAddressCustomer();
     }
 }

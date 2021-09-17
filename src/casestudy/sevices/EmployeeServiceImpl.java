@@ -22,7 +22,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
             System.out.println("Enter gender : 1. Male / 2. Female:");
             String gender = Validation.inputGender();
             System.out.println("Enter IdCardNumber:");
-            String idCardNumber = scanner.nextLine();//Validation.inputIdCardNumber();
+            String idCardNumber = scanner.nextLine();
             System.out.println("Enter phonenumber:");
             String phoneNumber = Validation.inputNumberphone();
             System.out.println("Enter Email :");
@@ -36,7 +36,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
             Employee employee = new Employee(fullName, birthday, gender, idCardNumber, phoneNumber,
                     email, level, position, salary);
             employeeList.add(employee);
-            ReadAndWrite.writeListEmployeeCSV(employeeList,"src\\casestudy\\data\\employee.csv",true);
+            ReadAndWrite.writeListEmployeeCSV(employeeList,"src\\casestudy\\data\\employee.csv",false);
             System.out.println("New more success ");
         } catch (NumberFormatException e) {
             e.printStackTrace();

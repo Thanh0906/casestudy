@@ -36,7 +36,7 @@ public class CustomerServiceImpl implements ICustomerService {
             String addressCustomer = scanner.nextLine();
             Customer customer = new Customer(fullName,birthday,gender,idCardNumber,phoneNumber,email,idCustomer,customerType,addressCustomer);
             customerList.add(customer);
-            ReadAndWrite.writeListCustomerCSV(customerList,"src\\casestudy\\data\\customer.csv",true  );
+            ReadAndWrite.writeListCustomerCSV(customerList,"src\\casestudy\\data\\customer.csv",false  );
             System.out.println("New more success ");
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,7 +93,7 @@ public class CustomerServiceImpl implements ICustomerService {
                             customerList.get(i).setGender(inputNewSex);
                             break;
                         case 4:
-                            System.out.print("Enter edit idcardnumber ");
+                            System.out.print("Enter edit idCardnumber ");
                             String inputNewId = scanner.nextLine();
                             customerList.get(i).setIdCardNumber(inputNewId);
                             break;
@@ -103,12 +103,12 @@ public class CustomerServiceImpl implements ICustomerService {
                             customerList.get(i).setEmail(inputNewEmail);
                             break;
                         case 6:
-                            System.out.print("Enter edit tybecustomer ");
+                            System.out.print("Enter edit tybeCustomer ");
                             String inputNewTypeCustomer = scanner.nextLine();
                             customerList.get(i).setCustomerType(inputNewTypeCustomer);
                             break;
                         case 7:
-                            System.out.print("Enter edit adressofcustomer: ");
+                            System.out.print("Enter edit adressCustomer: ");
                             String inputNewAddressCustomer = scanner.nextLine();
                             customerList.get(i).setAddressCustomer(inputNewAddressCustomer);
                             break;
