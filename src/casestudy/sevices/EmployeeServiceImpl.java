@@ -9,43 +9,73 @@ import java.util.List;
 import java.util.Scanner;
 
 public class EmployeeServiceImpl implements IEmployeeService {
-    static List<Employee> employeeList = new ArrayList<Employee>();
     static Scanner scanner = new Scanner(System.in);
-
+    static List<Employee> employeeList = new ArrayList<Employee>();
     @Override
     public void addList() {
+        List<Employee> employeeList = ReadAndWrite.getListEmployeeFromCSV("src\\casestudy\\data\\employee.csv");
+
         try {
-            System.out.println("Enter Name :");
-            String fullName = scanner.nextLine();
-            System.out.println("Enter birthday  :");
-            String birthday = Validation.inputDay();
-            System.out.println("Enter gender : 1. Male / 2. Female:");
-            String gender = Validation.inputGender();
-            System.out.println("Enter IdCardNumber:");
-            String idCardNumber = scanner.nextLine();
-            System.out.println("Enter phonenumber:");
-            String phoneNumber = Validation.inputNumberphone();
-            System.out.println("Enter Email :");
-            String email = Validation.inputEmail();
-            System.out.println("Enter level :");
-            String level = Validation.inputLevel();
-            System.out.println("Enter positio :");
-            String position = scanner.nextLine();
-            System.out.println("Enter salary :");
-            double salary = Validation.inputDouble();
-            Employee employee = new Employee(fullName, birthday, gender, idCardNumber, phoneNumber,
-                    email, level, position, salary);
-            employeeList.add(employee);
-            ReadAndWrite.writeListEmployeeCSV(employeeList,"src\\casestudy\\data\\employee.csv",false);
-            System.out.println("New more success ");
-        } catch (NumberFormatException e) {
+
+            String fullName;
+            do {
+                System.out.println("Enter name of employee");
+                fullName = scanner.nextLine();
+            }
+            while (!Validation.validateNameService(fullName));
+
+            String birthday;
+
+            do {
+                System.out.println("Enter date of birth  of employee:");
+                birthday = scanner.nextLine();
+            }
+            while (!Validation.validateDateOfBirth(birthday));
+
+            System.out.println("Enter gender of employee 1.Male/2.Female:");
+            String gender =inputGender();
+
+            String idCardNumber;
+            do {
+                System.out.println("Enter id card of employee:");
+                idCardNumber = scanner.nextLine();
+            }
+            while (!Validation.validateIdCard(idCardNumber));
+
+            String phoneNumber;
+            do {
+                System.out.println("Enter phone number of employee:");
+                phoneNumber = scanner.nextLine();
+            }
+            while (!Validation.validateNumberPhone(phoneNumber));
+
+            String email;
+            do {
+                System.out.println("Enter email of employee:");
+                email = scanner.nextLine();
+            }
+            while (!Validation.validateEmail(email));
+            String level = chooseLevel();
+            String position = choosePosition();
+            int salary;
+            do {
+                System.out.println("Enter salary of employee:");
+                salary = Integer.parseInt(scanner.nextLine());
+            } while (!Validation.validateSalary(salary));
+
+            employeeList.add(new Employee(fullName,birthday,gender,idCardNumber,phoneNumber,email,level,position,salary));
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("Add employee completed !");
+        ReadAndWrite.writeListEmployeeCSV(employeeList, "src\\casestudy\\data\\employee.csv",false);
+        displayList();
+
 
     }
 
     @Override
-    public void displayList()  {
+    public void displayList() {
         employeeList = ReadAndWrite.getListEmployeeFromCSV("src\\casestudy\\data\\employee.csv");
         System.out.println("List Employee");
         for (Employee employee:employeeList) {
@@ -56,10 +86,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
     public void editList() {
+        displayList();
         try {
             employeeList = ReadAndWrite.getListEmployeeFromCSV("src\\casestudy\\data\\employee.csv");
             System.out.println("Enter Id you want to edit ");
-            int idOfEdit = Validation.inputNumber();
+            int idOfEdit = Integer.parseInt(scanner.nextLine());
             boolean check = false;
             for (int i = 0; i < employeeList.size(); i++) {
                 if (idOfEdit - 1 == i) {
@@ -83,40 +114,70 @@ public class EmployeeServiceImpl implements IEmployeeService {
                             employeeList.get(i).setFullName(inputNewName);
                             break;
                         case 2:
-                            System.out.print("Enter edit birthDay: DD/MM/YYYY");
-                            String inputNewBirthday = Validation.inputBirthday();
+                            String inputNewBirthday = "";
+                            try {
+                                do {
+                                    System.out.print("Enter edit birthDay: DD/MM/YYYY");
+                                    inputNewBirthday = scanner.nextLine();
+                                }
+                                while (!Validation.validateDateOfBirth(inputNewBirthday));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             employeeList.get(i).setBirthday(inputNewBirthday);
                             break;
+
                         case 3:
-                            System.out.print("Enter edit gender 1.Male / 2.FeMale: ");
-                            String inputNewSex = Validation.inputGender();
-                            employeeList.get(i).setGender(inputNewSex);
+                            String gender = "";
+                            try {
+                                System.out.print("Enter edit gender 1.Male / 2.FeMale: ");
+                                gender = inputGender();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            employeeList.get(i).setGender(gender);
                             break;
                         case 4:
-                            System.out.print("Enter edit id Number: ");
-                            String inputNewId = scanner.nextLine();
+                            String inputNewId = "";
+                            try {
+                                System.out.print("Enter edit id Number: ");
+                                inputNewId = scanner.nextLine();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             employeeList.get(i).setIdCardNumber(inputNewId);
                             break;
                         case 5:
-                            System.out.print("Enter edit Email ");
-                            String inputNewEmail = Validation.inputEmail();
-                            employeeList.get(i).setEmail(inputNewEmail);
+                            String email = "";
+                            try {
+                                System.out.println("Enter new email of employeee : ");
+                                email = scanner.nextLine();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                           employeeList.get(i).setEmail(email);
                             break;
                         case 6:
                             System.out.print("Emter edit level ");
-                            String inputNewLevel = Validation.inputLevel();
-                            employeeList.get(i).setLevel(inputNewLevel);
+                            String level = chooseLevel();
+                            employeeList.get(i).setLevel(level);
                             break;
                         case 7:
                             System.out.print("Enter  edit position: ");
-                            String inputNewPosition = scanner.nextLine();
+                            String inputNewPosition = choosePosition();
                             employeeList.get(i).setPosition(inputNewPosition);
                             break;
                         case 8:
-                            System.out.print("Enter edit salary ");
-                            double inputNewSalary = Validation.inputDouble();
+                            double inputNewSalary=0;
+                            try {
+                                System.out.print("Enter edit salary ");
+                                inputNewSalary= Double.parseDouble(scanner.nextLine());
+                            } catch (NumberFormatException e) {
+                                e.printStackTrace();
+                            }
                             employeeList.get(i).setSalary(inputNewSalary);
                             break;
+
                         case 0:
                             break;
                         default:
@@ -132,5 +193,88 @@ public class EmployeeServiceImpl implements IEmployeeService {
             e.printStackTrace();
         }
 
+    }
+    private static String inputGender() {
+        String gender = "";
+        boolean check = true;
+        while (check) {
+            try {
+                int choice = Integer.parseInt(scanner.nextLine());
+                if (choice == 1) {
+                    gender = "Male";
+                } else if (choice == 2) {
+                    gender = "Female";
+                }
+                check =false;
+            } catch (Exception e) {
+                System.out.println("No matches.Re-Enter: ");
+            }
+        }
+        return gender;
+    }
+    private String chooseLevel() {
+        String level;
+        System.out.println("Choose level: "
+                + "1.Intermediate \n"
+                + "2.College \n"
+                + "3.University \n"
+                + "4.Postgraduate");
+        String choose = scanner.nextLine();
+        switch (choose) {
+            case "1":
+                level = "Intermediate";
+                break;
+            case "2":
+                level = "College";
+                break;
+            case "3":
+                level = "University";
+                break;
+            case "4":
+                level = "Postgraduate";
+                break;
+
+            default:
+                throw new IllegalStateException("Unexpected value: " + choose);
+        }
+        return level;
+    }
+
+    private String choosePosition() {
+
+        String position;
+
+        System.out.println("Choose position: "
+                + "1.Receptionist \n" //Lễ tân
+                + "2.Staff \n" //phục vụ
+                + "3.Expert \n" //chuyên viên
+                + "4.Monitor \n" //Giám sát
+                + "5.Manager \n"  //Quản lý
+                + "6.Direction"); //giám đốc
+        String choose = scanner.nextLine();
+        switch (choose) {
+            case "1":
+                position = "Receptionist";
+                break;
+            case "2":
+                position = "Staff";
+                break;
+            case "3":
+                position = "Expert";
+                break;
+            case "4":
+                position = "Monitor";
+                break;
+            case "5":
+                position = "Manager";
+                break;
+            case "6":
+                position = "Direction";
+                break;
+
+            default:
+                throw new IllegalStateException("Unexpected value: " + choose);
+        }
+        return position;
     }
 }

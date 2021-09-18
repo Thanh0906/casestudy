@@ -15,37 +15,66 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public void addList() {
-        try {
-            System.out.println("Ennter Name :");
-            String fullName = scanner.nextLine();
-            System.out.println("Enter birthday :");
-            String birthday= Validation.inputBirthday();
-            System.out.println("Enter gender 1.Male / 2.Female :");
-            String gender = Validation.inputGender();
-            System.out.println("Enter IdCardNumber :");
-            String idCardNumber =scanner.nextLine();
-            System.out.println("Enter phonenumber");
-            String phoneNumber =Validation.inputNumberphone();
-            System.out.println("Enter Email :");
-            String email = Validation.inputEmail();
-            System.out.println("Enter idCustomer");
-            String idCustomer =scanner.nextLine();
-            System.out.println("Enter customerTybe 1. Diamond / 2. Platinium /3. Gold / 4. Silver / 5. Member:");
-            String customerType = Validation.inputcustomerType();
-            System.out.println("Enter addressCustomer :");
-            String addressCustomer = scanner.nextLine();
-            Customer customer = new Customer(fullName,birthday,gender,idCardNumber,phoneNumber,email,idCustomer,customerType,addressCustomer);
-            customerList.add(customer);
-            ReadAndWrite.writeListCustomerCSV(customerList,"src\\casestudy\\data\\customer.csv",false  );
-            System.out.println("New more success ");
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            try {
+
+                System.out.println("Enter name of customer");
+                String fullName = scanner.nextLine();
+                String birthday;
+                do {
+                    System.out.println("Enter date of birth  of customer:");
+                    birthday = scanner.nextLine();
+                }
+                while (!Validation.validateDateOfBirth(birthday));
+                System.out.println("Enter gender of employee 1.Male/2.Female:");
+                String gender =inputGender();
+                String idCardNumber;
+                do {
+                    System.out.println("Enter id card of customer:");
+                    idCardNumber = scanner.nextLine();
+                } while (!Validation.validateIdCard(idCardNumber));
+                String phoneNumber;
+                do {
+                    System.out.println("Enter phone number of customer:");
+                    phoneNumber = scanner.nextLine();
+                } while (!Validation.validateNumberPhone(phoneNumber));
+                String email;
+                do {
+                    System.out.println("Enter email of customer:");
+                    email = scanner.nextLine();
+                } while (!Validation.validateEmail(email));
+                String idCustomer = "";
+                boolean flag = true;
+                while (flag) {
+                    try {
+                        System.out.println("Enter new employee code");
+                        idCustomer = scanner.nextLine();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    flag = false;
+                    for (Customer customer : customerList) {
+                        if (customer.getIdCustomer().equals(idCustomer)) {
+                            System.out.println("Customer code is exist, please enter again !");
+                            flag = true;
+                            break;
+                        }
+                    }
+                }
+                String customerType = chooseTypeCustomer();
+                System.out.println("Enter addressCustomer :");
+                String addressCustomer = scanner.nextLine();
+                Customer customer = new Customer(fullName, birthday, gender, idCardNumber, phoneNumber, email, idCustomer, customerType, addressCustomer);
+                customerList.add(customer);
+                ReadAndWrite.writeListCustomerCSV(customerList, "src\\casestudy\\data\\customer.csv", false);
+                System.out.println("New more success ");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
 
-
-    }
-
-    @Override
+        @Override
     public void displayList() {
         customerList =  ReadAndWrite.getListCustomerFromCSV("src\\casestudy\\data\\customer.csv");
         System.out.println("customerList");
@@ -78,38 +107,71 @@ public class CustomerServiceImpl implements ICustomerService {
                     int choice = Integer.parseInt(scanner.nextLine());
                     switch (choice) {
                         case 1:
-                            System.out.print("Enter edit name: ");
-                            String inputNewName = scanner.nextLine();
+                            String inputNewName = "";
+                            try {
+                                System.out.println("Enter new name of customer : ");
+                                inputNewName = scanner.nextLine();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
                             customerList.get(i).setFullName(inputNewName);
                             break;
                         case 2:
-                            System.out.print("Enter edit birthDay: DD/MM/YYYY");
-                            String inputNewBirthday = Validation.inputBirthday();
+                            String inputNewBirthday = "";
+                            try {
+                                do {
+                                    System.out.println("Enter new date of birth  of customer : ");
+                                    inputNewBirthday = scanner.nextLine();
+                                }
+                                while (!Validation.validateDateOfBirth(inputNewBirthday));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             customerList.get(i).setBirthday(inputNewBirthday);
                             break;
                         case 3:
-                            System.out.print("Enter edit gender 1.Male /2.Female: ");
-                            String inputNewSex = Validation.inputGender();
-                            customerList.get(i).setGender(inputNewSex);
+                            String inputGender = "";
+                            try {
+                                System.out.println("Enter new gender of customer : ");
+                                inputGender = inputGender;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            customerList.get(i).setGender(inputGender);
                             break;
                         case 4:
-                            System.out.print("Enter edit idCardnumber ");
-                            String inputNewId = scanner.nextLine();
-                            customerList.get(i).setIdCardNumber(inputNewId);
+                            String inputIdCard = "";
+                            try {
+                                System.out.println("Enter new id card of customer : ");
+                                inputIdCard = scanner.nextLine();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            customerList.get(i).setIdCardNumber(inputIdCard);
                             break;
                         case 5:
-                            System.out.print("Enter edit email ");
-                            String inputNewEmail = Validation.inputEmail();
+                            String inputNewEmail = "";
+                            try {
+                                System.out.println("Enter new email of customer : ");
+                                inputNewEmail = scanner.nextLine();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             customerList.get(i).setEmail(inputNewEmail);
                             break;
                         case 6:
-                            System.out.print("Enter edit tybeCustomer ");
-                            String inputNewTypeCustomer = scanner.nextLine();
+                            String inputNewTypeCustomer = chooseTypeCustomer();
                             customerList.get(i).setCustomerType(inputNewTypeCustomer);
                             break;
                         case 7:
-                            System.out.print("Enter edit adressCustomer: ");
-                            String inputNewAddressCustomer = scanner.nextLine();
+                            String inputNewAddressCustomer = "";
+                            try {
+                                System.out.println("Enter new address of customer : ");
+                                inputNewAddressCustomer = scanner.nextLine();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             customerList.get(i).setAddressCustomer(inputNewAddressCustomer);
                             break;
 
@@ -131,5 +193,55 @@ public class CustomerServiceImpl implements ICustomerService {
         }
 
 
+    }
+    private static String inputGender() {
+        String gender = "";
+        boolean check = true;
+        while (check) {
+            try {
+                int choice = Integer.parseInt(scanner.nextLine());
+                if (choice == 1) {
+                    gender = "Male";
+                } else if (choice == 2) {
+                    gender = "Female";
+                }
+                check =false;
+            } catch (Exception e) {
+                System.out.println("No matches.Re-Enter: ");
+            }
+        }
+        return gender;
+    }
+    private String chooseTypeCustomer() {
+        System.out.println("Choose type of customer: ");
+        String customerType;
+
+        System.out.println("Choose type of customer: "
+                + "1.Diamond \n"
+                + "2.Platinium \n"
+                + "3.Gold \n"
+                + "4.Silver \n"
+                + "5.Member ");
+        String choose = scanner.nextLine();
+        switch (choose) {
+            case "1":
+                customerType = "Diamond";
+                break;
+            case "2":
+                customerType = "Platinium";
+                break;
+            case "3":
+                customerType = "Gold";
+                break;
+            case "4":
+                customerType = "Silver";
+                break;
+            case "5":
+                customerType = "Member";
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + choose);
+        }
+        return customerType;
     }
 }

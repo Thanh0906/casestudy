@@ -18,13 +18,32 @@ public class ContactServiceImpl implements IContactService {
         try {
             Queue<Booking> queueBooking = ReadAndWrite.getQueueBookingFromCSV("casestudy\\data\\queueBooking.csv");
             System.out.println("Enter  number contracts : ");
-            String numberContract = scanner.nextLine();
+
+            String numberContract = "";
+            boolean flag = true;
+            while (flag) {
+                try {
+                    System.out.println("Enter number of contract");
+                    numberContract = scanner.nextLine();
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+                flag = false;
+                for (Contract contract : contractList) {
+                    if (contract.getNumberContract().equals(numberContract)) {
+                        System.out.println("Contract number is exist, please enter again !");
+                        flag = true;
+                        break;
+                    }
+                }
+
+            }
             System.out.println("Enter idBooking");
             String idBooking = queueBooking.peek().getIdBooking();
             System.out.println("Enter deposit");
-            double deposit = Validation.inputDouble();
+            double deposit = Double.parseDouble(scanner.nextLine());
             System.out.println("Enter totalPayment");
-            double totalPayment =Validation.inputDouble();
+            double totalPayment =Double.parseDouble(scanner.nextLine());
             System.out.println("idCustomer");
             String idCustomer = BookingServiceImpl.queueBooking.peek().getIdCustomer();
             Contract contract = new Contract(numberContract,idBooking,deposit,totalPayment,idCustomer);
@@ -56,7 +75,7 @@ public class ContactServiceImpl implements IContactService {
         boolean flag = false;
         while (flag){
             System.out.println("Enter number Contract");
-            int idContract =Validation.inputNumber();
+            int idContract =Integer.parseInt(scanner.nextLine());
             for (int i =0;i<contractList.size();i++){
                 if (idContract -1 ==i){
                     flag = true;
@@ -71,28 +90,53 @@ public class ContactServiceImpl implements IContactService {
                     int choice = Integer.parseInt(scanner.nextLine());
                     switch (choice){
                         case 1:
-                            System.out.println("Enter edit numberContract");
-                            String numberContract =scanner.nextLine();
+                            String numberContract="";
+                            try {
+                                System.out.println("Enter number of Contract");
+                                numberContract = scanner.nextLine();
+                            } catch (NumberFormatException e) {
+                                e.printStackTrace();
+                            }
                             contractList.get(i).setNumberContract(numberContract);
                             break;
                         case 2:
-                            System.out.println("Enter edit idBooking");
-                            String idBooking =scanner.nextLine();
+                            String idBooking="";
+                            try {
+                                System.out.println("Enter edit idBooking");
+                                idBooking = scanner.nextLine();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             contractList.get(i).setIdBooking(idBooking);
                             break;
                         case 3:
-                            System.out.println("Enter edit deposit");
-                           double deposit =Validation.inputDouble();
+                            double deposit=0;
+                            try {
+                                System.out.println("Enter edit deposit of Contract");
+                                 deposit =Double.parseDouble(scanner.nextLine());
+                            } catch (NumberFormatException e) {
+                                e.printStackTrace();
+                            }
                             contractList.get(i).setDeposit(deposit);
                             break;
                         case 4:
-                            System.out.println("Enter edit totalPayment");
-                            Double totalPayment =Validation.inputDouble();
+                            double totalPayment=0;
+                            try {
+                                System.out.println("Enter edit totalPayment");
+                                totalPayment =Double.parseDouble(scanner.nextLine());
+                            } catch (NumberFormatException e) {
+                                e.printStackTrace();
+                            }
                             contractList.get(i).setTotalPayment(totalPayment);
                             break;
                         case 5:
-                            System.out.println("Enter edit idCustomer");
-                            String idCustomer =scanner.nextLine();
+                            String idCustomer="";
+                            try{
+                                System.out.println("Enter customer code Contract");
+                                idCustomer = scanner.nextLine();}
+                            catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             contractList.get(i).setIdCustomer(idCustomer);
                             break;
                         case 0:

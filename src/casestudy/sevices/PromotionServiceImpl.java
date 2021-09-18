@@ -66,11 +66,11 @@ public class PromotionServiceImpl implements IPromotionService {
             Set<Booking> listBooking = ReadAndWrite.getListBookingFromCSV("casestudy\\data\\listBooking.csv");
 
                System.out.println("Enter voucher 10% quantity :");
-               int voucher10 = Validation.inputNumber();
+               int voucher10 = Integer.parseInt(scanner.nextLine());
                System.out.println("Enter voucher 20% quantity :");
-               int voucher20 = Validation.inputNumber();
+               int voucher20 = Integer.parseInt(scanner.nextLine());
                System.out.println("Enter voucher 50% quantity :");
-               int voucher50 = Validation.inputNumber();
+               int voucher50 = Integer.parseInt(scanner.nextLine());
 
             int totalVoucher = voucher10 + voucher20 + voucher50;
             int count = 0;

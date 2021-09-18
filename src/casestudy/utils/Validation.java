@@ -1,294 +1,194 @@
 package casestudy.utils;
 
-import javax.print.DocFlavor;
-import java.time.LocalDate;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Validation {
     static Scanner scanner = new Scanner(System.in);
 
-    //nhập ngày
-    public static String inputDay() {
-        String checkDay = "";
-        boolean check = true;
-        while (check) {
-            checkDay = scanner.nextLine();
-            if (!checkDay.matches("^[0-9]{2}/[0-9]{2}/(19[0-9][0-9]|20[0-9][0-9])$")) {
-                System.out.println("No matches.Re-Enter");
-            } else {
-                check = false;
+    public static boolean validateNameService(String nameService) {
+        final String SERVICE_NAME_REGEX = "^[A-Z][A-z]*";
+
+        if (nameService.matches(SERVICE_NAME_REGEX)) {
+            return true;
+        } else {
+            System.err.println("Please enter again, wrong text format !");
+            return false;
+        }
+
+    }
+
+    public static boolean validateSalary(double salary) {
+        if (salary > 0) {
+            return true;
+        } else {
+            System.err.println("Please enter salary again, salary must be greater than zero !");
+            return false;
+        }
+    }
+
+    public static boolean validateIdCard(String idCard) {
+        final String ID_CARD_REGEX = "\\d{9}";
+        if (idCard.matches(ID_CARD_REGEX)) {
+            return true;
+        } else {
+            System.err.println("Please enter again, id card is 9-digit string ");
+            return false;
+        }
+    }
+
+    public static boolean validateNumberPhone(String numberPhone) {
+        final String NUMBER_PHONE_REGEX = "\\d{10}";
+        if (numberPhone.matches(NUMBER_PHONE_REGEX)) {
+            return true;
+        } else {
+            System.err.println("Please enter again, number of phone is 10-digit string ");
+            return false;
+        }
+    }
+
+    public static boolean validateEmail(String email) {
+        final String EMAIL_REGEX = "^[A-z]{1}((\\w)*[.]?(\\w)*|(\\w)*[-]?(\\w)*)@[a-z0-9]+([.][a-z]{2,3}){1,5}";
+        if (email.matches(EMAIL_REGEX)) {
+            return true;
+        } else {
+            System.err.println("Please enter again, wrong email format !");
+            return false;
+        }
+    }
+
+    public static boolean validateCodeService(String codeOfService) {
+        final String CODE_SERVICE_REGEX = "^[SV]+(VL|HO|RO)+[-]+\\d{4}";
+
+        if (codeOfService.matches(CODE_SERVICE_REGEX)) {
+            return true;
+        } else {
+            System.err.println("Please enter again, wrong text format !");
+            return false;
+
+        }
+    }
+
+    public static boolean validateArea(double area) {
+        if (area > 30) {
+            return true;
+        } else {
+            System.err.println("Please enter area again, area must be greater than 30");
+            return false;
+        }
+    }
+
+    public static boolean validatePoolArea(double poolArea) {
+        if (poolArea > 30) {
+            return true;
+        } else {
+            System.err.println("Please enter area again, area of pool must be greater than 30");
+            return false;
+        }
+    }
+
+    public static boolean validateCost(int cost) {
+        if (cost > 0) {
+            return true;
+        } else {
+            System.err.println("Please enter cost again, Cost must be more than zero !");
+            return false;
+        }
+    }
+
+    public static boolean validateNumberOfPeople(int numberOfPeople) {
+        if (numberOfPeople > 0 && numberOfPeople < 20) {
+            return true;
+        } else {
+            System.err.println("Please enter  again, Number of people must be greater than 0 and less than 20 !");
+            return false;
+        }
+    }
+
+    public static boolean validateNumberOfFloor(int numberOfFloor) {
+        if (numberOfFloor > 0) {
+            return true;
+        } else {
+            System.err.println("Please enter again, number of floor must be greater than 0 !");
+            return false;
+        }
+    }
+
+    public static boolean validateRentalType(String rentalType) {
+        final String RENTAL_TYPE_REGEX = "^[A-Z][A-z]*";
+
+        if (rentalType.matches(RENTAL_TYPE_REGEX)) {
+            return true;
+        } else {
+            System.err.println("Please enter again, wrong text format !");
+            return false;
+        }
+
+    }
+
+    public static boolean validateRoomStandard(String roomStandard) {
+        final String RENTAL_TYPE_REGEX = "^[A-Z][A-z]*";
+
+        if (roomStandard.matches(RENTAL_TYPE_REGEX)) {
+            return true;
+        } else {
+            System.err.println("Please enter again, wrong text format !");
+            return false;
+        }
+    }
+
+    public static boolean validateDateOfBirth(String dateOfBirth) {
+        final String DATE_OF_BIRTH_REGEX = "(([1-2]{1}+[\\d]{1})|(0+[1-9]{1})|(3+[0-1]))+(\\/)+((0+[1-9]{1})|(1+[0-2]{1}))+(\\/)+[\\d]{4}";
+        try {
+            if (!dateOfBirth.matches(DATE_OF_BIRTH_REGEX)) {
+                throw new DateFormatException("Wrong format, please enter again.");
             }
+        } catch (DateFormatException e) {
+            System.err.println(e.getString() + "(dd/mm/yyyy)");
+            return false;
         }
-        return checkDay;
-    }
+        String[] arrayDate = dateOfBirth.split("/");
+        int day = Integer.parseInt(arrayDate[0]);
+        int month = Integer.parseInt(arrayDate[1]);
+        int year = Integer.parseInt(arrayDate[2]);
+        DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date currentDate = new Date();
+        Date date1;
+        Date date2;
+        long getDayDiff = 0;
+        try {
+            String startDate = "" + day + "-" + month + "-" + year;
+            String endDate = simpleDateFormat.format(currentDate);
+            date1 = simpleDateFormat.parse(startDate);
+            date2 = simpleDateFormat.parse(endDate);
+            long getDiff = date2.getTime() - date1.getTime();
 
-    //giới tính
-    public static String inputGender() {
-        String gender = "";
-        boolean check = true;
-        while (check) {
-            try {
-                int choice = Integer.parseInt(scanner.nextLine());
-                if (choice == 1) {
-                    gender = "Male";
-                } else if (choice == 2) {
-                    gender = "Female";
-                }
-                check =false;
-            } catch (Exception e) {
-                System.out.println("No matches.Re-Enter: ");
+            getDayDiff = getDiff / (24 * 60 * 60 * 1000);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        boolean checkDateMin = getDayDiff / 365 > 18;
+        boolean checkDateMax = getDayDiff / 365 < 100;
+        try {
+            if (!checkDateMax) {
+                throw new AgeFormatException("Age must be less than 100, please enter again !");
             }
+        } catch (AgeFormatException e) {
+            System.err.println(e.getString());
+            return false;
         }
-        return gender;
-    }
-
-    //định dạng email
-    public static String inputEmail() {
-        String checkEmail = "";
-        boolean check = true;
-        while (check) {
-            checkEmail = scanner.nextLine();
-            if (!checkEmail.matches("^[a-zA-Z0-9]+@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)$")) {
-                System.out.println("No matches.Re-Enter ");
-            } else {
-                check = false;
+        try {
+            if (!checkDateMin) {
+                throw new AgeFormatException("Age must be greater than 18, please enter again !");
             }
+        } catch (AgeFormatException e) {
+            System.err.println(e.getString());
+            return false;
         }
-        return checkEmail;
+        return true;
     }
-
-    public static String inputNameService() {
-        boolean boole = true;
-        String name = "";
-        while (boole) {
-            name = scanner.nextLine();
-            if (name.matches("^[A-Z][A-z]$")) {
-                boole = false;
-            } else {
-                System.out.println("No matches.Re-Enter  ");
-            }
-        }
-        return name;
-    }
-
-    //diện tích sử dụng
-    public static Double inputUseArea() {
-        boolean boole = true;
-        double useArea = 0;
-        while (boole) {
-            try {
-                useArea = Double.parseDouble(scanner.nextLine());
-                if (useArea > 30) {
-                    boole = false;
-                } else {
-                    System.out.println("The useArea must be more than 30.Re-Enter");
-
-                }
-            } catch (Exception e) {
-                System.out.println("No matches.Re-Enter ");
-
-            }
-
-        }
-        return useArea;
-    }
-
-    //kiểu dữ liệu doble đều dùng
-    public static Double inputDouble() {
-
-        boolean boole = true;
-        double money = 0;
-        while (boole) {
-            try {
-                money = Double.parseDouble(scanner.nextLine());
-                if (money >= 0) {
-                    boole = false;
-                } else {
-                    System.out.println("No matches.Re-Enter ");
-
-                }
-            } catch (Exception e) {
-                System.out.println("No matches.Re-Enter ");
-
-            }
-
-        }
-        return money;
-    }
-
-    //số người
-    public static Integer inputNumberPeople() {
-        int numberPeople = 0;
-        boolean boole = true;
-        while (boole) {
-            try {
-                numberPeople = Integer.parseInt(scanner.nextLine());
-                if (numberPeople > 0 && numberPeople < 20) {
-                    boole = false;
-                } else {
-                    System.out.println("Not find  ");
-                }
-
-            } catch (Exception e) {
-                System.out.println("No matches.Re-Enter ");
-            }
-        }
-        return numberPeople;
-    }
-
-    public static String inputIdService(String string) {
-        boolean boole = true;
-        String idService = "";
-        while (boole) {
-            idService = scanner.nextLine();
-            if (idService.matches("^SV" + string + "-[0-9]{4}$")) {
-                boole = false;
-            } else {
-                System.out.println("No matches.Re-Enter ");
-
-            }
-        }
-        return idService;
-    }
-
-    //số tầng
-    public static int inputNumberFloors() {
-        boolean boole = true;
-        int numberFloors = 0;
-        while (boole) {
-            try {
-                numberFloors = Integer.parseInt(scanner.nextLine());
-                if (numberFloors >= 0) {
-                    boole = false;
-                } else {
-                    System.out.println("No matches.Re-Enter ");
-
-                }
-            } catch (Exception e) {
-                System.out.println("No matches.Re-Enter ");
-
-            }
-
-        }
-        return numberFloors;
-
-    }
-
-    //định dạng nam sinnh
-    public static String inputBirthday() {
-        String birthday = "";
-        boolean boole = true;
-        while (boole) {
-            birthday = inputDay();
-            String[] strings = birthday.split("/");
-            LocalDate localDate = LocalDate.now();
-            int age = localDate.getYear() - Integer.parseInt(strings[2]);
-            if (age < 18) {
-                System.out.println("Less 18.Re-enter");
-
-            } else if (age > 100) {
-                System.out.println("Than 100.Re-enter");
-
-            } else {
-                boole = false;
-            }
-        }
-        return birthday;
-    }
-
-    public static Integer inputNumber() {
-        int number = 0;
-        boolean boole = true;
-        while (boole) {
-            try {
-                number = Integer.parseInt(scanner.nextLine());
-                boole = false;
-            } catch (Exception e) {
-                System.out.println("Not number");
-            }
-
-        }
-        return number;
-    }
-    public static  String styleRental() {
-        System.out.println("1. Year  / 2. Month / 3. Dayy / 4. Hour ");
-        int choice = inputNumber();
-        String temp = "";
-        switch (choice) {
-            case 1:
-                temp = "Year";
-                break;
-            case 2:
-                temp = "Month";
-                break;
-            case 3:
-                temp = "Day";
-                break;
-            case 4:
-                temp = "Hour";
-                break;
-        }
-        return temp;
-    }
-    public static  String inputLevel (){
-        System.out.println("Enter choice level:  1. Intermediate  / 2. college  / 3. University / 4.After university ");
-        int choiceLevel = inputNumber();
-        String level = "";
-        switch (choiceLevel) {
-            case 1:
-                level = "Intermediate";
-                break;
-            case 2:
-                level = "college";
-                break;
-            case 3:
-                level = "University";
-                break;
-            case 4:
-                level = "After university";
-                break;
-            default:
-                System.out.println("No choice");
-        }
-        return level;
-    }
-    public static String inputcustomerType(){
-        int choiceCostomerType = inputNumber();
-        String customerType = "";
-        switch (choiceCostomerType) {
-            case 1:
-                customerType = "Diamond";
-                break;
-            case 2:
-                customerType = "Platinium";
-                break;
-            case 3:
-                customerType = "Gold";
-                break;
-            case 4:
-                customerType = "Silver";
-                break;
-            case 5:
-                customerType = "Member";
-                break;
-            default:
-                System.out.println("No choice");
-        }
-        return customerType;
-    }
-    public static  String inputNumberphone(){
-        boolean boole = true;
-        String numberPhone = "";
-        while (boole) {
-            numberPhone = scanner.nextLine();
-            if (numberPhone.matches("^(09|03|07|08|05)+[0-9]{8}$")) {
-                boole = false;
-            } else {
-                System.out.println("No matches.Re-Enter ");
-            }
-        }
-        return numberPhone;
-    }
-
 }
 

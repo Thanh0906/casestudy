@@ -19,7 +19,7 @@ public class FuramaController {
             System.out.println("5. Promotion Management ");
             System.out.println("6. Exit ");
             System.out.println("Enter your choice: ");
-                choice = Validation.inputNumber();
+                choice =   Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
                         EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
@@ -30,7 +30,7 @@ public class FuramaController {
                             System.out.println("3. Edit employee ");
                             System.out.println("4. Return main menu ");
                             System.out.println("Enter your choice: ");
-                            choiceNumber1 = Validation.inputNumber();
+                            choiceNumber1 = Integer.parseInt(scanner.nextLine());
                             switch (choiceNumber1) {
                                 case 1:
                                     employeeService.displayList();
@@ -57,7 +57,7 @@ public class FuramaController {
                             System.out.println("3. Edit customer ");
                             System.out.println("4. Return main menu ");
                             System.out.println("Enter your choice: ");
-                            choiceNumber2 = Validation.inputNumber()    ;
+                            choiceNumber2 = Integer.parseInt(scanner.nextLine());
                             switch (choiceNumber2) {
                                 case 1:
                                     customerService.displayList();
@@ -84,7 +84,7 @@ public class FuramaController {
                             System.out.println("3. Display list facility maintenance ");
                             System.out.println("4. Return main menu ");
                             System.out.println("Enter your choice: ");
-                            choiceNumber3 = Validation.inputNumber();
+                            choiceNumber3 = Integer.parseInt(scanner.nextLine());
                             switch (choiceNumber3) {
                                 case 1:
                                     facilityService.displayList();
@@ -114,7 +114,7 @@ public class FuramaController {
                             System.out.println("5. Edit contracts ");
                             System.out.println("6. Return main menu ");
                             System.out.println("Enter your choice: ");
-                            choiceNumber4 = Validation.inputNumber();
+                            choiceNumber4 = Integer.parseInt(scanner.nextLine());
                             switch (choiceNumber4) {
                                 case 1:
                                     bookingService.addList();
@@ -145,7 +145,7 @@ public class FuramaController {
                             System.out.println("2. Display list customers get voucher ");
                             System.out.println("3. Return main menu ");
                             System.out.println("Enter your choice: ");
-                            choiceNumber5 = Validation.inputNumber();
+                            choiceNumber5 = Integer.parseInt(scanner.nextLine());
                             switch (choiceNumber5) {
                                 case 1:
                                     promotionService.displayList();
