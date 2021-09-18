@@ -99,8 +99,8 @@ public class Validation {
         }
     }
 
-    public static boolean validateNumberOfPeople(int numberOfPeople) {
-        if (numberOfPeople > 0 && numberOfPeople < 20) {
+    public static boolean validateNumberPeople(int numberPeople) {
+        if (numberPeople > 0 && numberPeople < 20) {
             return true;
         } else {
             System.err.println("Please enter  again, Number of people must be greater than 0 and less than 20 !");
@@ -108,8 +108,8 @@ public class Validation {
         }
     }
 
-    public static boolean validateNumberOfFloor(int numberOfFloor) {
-        if (numberOfFloor > 0) {
+    public static boolean validateNumberFloor(int numberFloor) {
+        if (numberFloor > 0) {
             return true;
         } else {
             System.err.println("Please enter again, number of floor must be greater than 0 !");
@@ -140,7 +140,7 @@ public class Validation {
         }
     }
 
-    public static boolean validateDateOfBirth(String dateOfBirth) {
+    public static boolean validateBirthday(String dateOfBirth) {
         final String DATE_OF_BIRTH_REGEX = "(([1-2]{1}+[\\d]{1})|(0+[1-9]{1})|(3+[0-1]))+(\\/)+((0+[1-9]{1})|(1+[0-2]{1}))+(\\/)+[\\d]{4}";
         try {
             if (!dateOfBirth.matches(DATE_OF_BIRTH_REGEX)) {

@@ -30,7 +30,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
                 System.out.println("Enter date of birth  of employee:");
                 birthday = scanner.nextLine();
             }
-            while (!Validation.validateDateOfBirth(birthday));
+            while (!Validation.validateBirthday(birthday));
 
             System.out.println("Enter gender of employee 1.Male/2.Female:");
             String gender =inputGender();
@@ -120,7 +120,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
                                     System.out.print("Enter edit birthDay: DD/MM/YYYY");
                                     inputNewBirthday = scanner.nextLine();
                                 }
-                                while (!Validation.validateDateOfBirth(inputNewBirthday));
+                                while (!Validation.validateBirthday(inputNewBirthday));
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

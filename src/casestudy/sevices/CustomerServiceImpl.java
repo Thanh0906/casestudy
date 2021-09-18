@@ -25,7 +25,7 @@ public class CustomerServiceImpl implements ICustomerService {
                     System.out.println("Enter date of birth  of customer:");
                     birthday = scanner.nextLine();
                 }
-                while (!Validation.validateDateOfBirth(birthday));
+                while (!Validation.validateBirthday(birthday));
                 System.out.println("Enter gender of employee 1.Male/2.Female:");
                 String gender =inputGender();
                 String idCardNumber;
@@ -124,7 +124,7 @@ public class CustomerServiceImpl implements ICustomerService {
                                     System.out.println("Enter new date of birth  of customer : ");
                                     inputNewBirthday = scanner.nextLine();
                                 }
-                                while (!Validation.validateDateOfBirth(inputNewBirthday));
+                                while (!Validation.validateBirthday(inputNewBirthday));
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

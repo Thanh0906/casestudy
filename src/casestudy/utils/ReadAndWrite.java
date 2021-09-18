@@ -113,6 +113,32 @@ public class ReadAndWrite {
         }
         return listString;
     }
+    public static Map<Facility,Integer> getFacilityMap(String path){
+        List<String> listString = readCSV(path);
+        Map<Facility,Integer> facilityMap = new LinkedHashMap<>();
+        for (String s : listString) {
+            String[] array = s.split(",");
+            if (array[0].equals("Villa")) {
+                Facility villa = new Villa(array[1], array[2], Double.parseDouble(array[3]), Integer.parseInt(array[4]),
+                        Integer.parseInt(array[5]), array[6], array[7],
+                        Double.parseDouble(array[8]), Integer.parseInt(array[9]));
+                facilityMap.put(villa, Integer.parseInt(array[10]));
+            }
+            if (array[0].equals("House")) {
+                Facility house = new House(array[1], array[2], Double.parseDouble(array[3]), Integer.parseInt(array[4]),
+                        Integer.parseInt(array[5]), array[6], array[7],
+                        Integer.parseInt(array[8]));
+                facilityMap.put(house, Integer.parseInt(array[9]));
+            }
+            if (array[0].equals("Room")) {
+                Facility room = new Room(array[1], array[2], Double.parseDouble(array[3]), Integer.parseInt(array[4]),
+                        Integer.parseInt(array[5]), array[6], array[7]);
+                facilityMap.put(room, Integer.parseInt(array[8]));
+            }
+        }
+        return facilityMap;
+    }
+
     public static List<Employee> getListEmployeeFromCSV(String path){
         List<Employee> employees =new ArrayList<>();
         List<String> stringList =readCSV(path);

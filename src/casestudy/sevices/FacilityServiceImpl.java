@@ -8,7 +8,6 @@ import casestudy.model.facility.Villa;
 import casestudy.utils.ReadAndWrite;
 import casestudy.utils.Validation;
 
-import java.io.*;
 import java.util.*;
 
 public class FacilityServiceImpl implements IFacilityService {
@@ -101,7 +100,7 @@ public class FacilityServiceImpl implements IFacilityService {
                 System.out.println("Enter the number of people of villa: ");
                 numberPeople = Integer.parseInt(scanner.nextLine());
             }
-            while (!Validation.validateNumberOfPeople(numberPeople));
+            while (!Validation.validateNumberPeople(numberPeople));
             String styleRental;
             do {
                 styleRental = chooseRentalType();
@@ -124,7 +123,7 @@ public class FacilityServiceImpl implements IFacilityService {
                 System.out.println("Enter the number of floors of villa:");
                 numberFloors = Integer.parseInt(scanner.nextLine());
             }
-            while (!Validation.validateNumberOfFloor(numberFloors));
+            while (!Validation.validateNumberFloor(numberFloors));
             Villa villa = new Villa(idService, nameService, useArea, rentalCosts, numberPeople,
                     styleRental, roomStandard, poolArea, numberFloors);
             List<Villa> villaList = new ArrayList<>();
@@ -166,7 +165,7 @@ public class FacilityServiceImpl implements IFacilityService {
                 System.out.println("Enter the number of people of villa: ");
                 numberPeople = Integer.parseInt(scanner.nextLine());
             }
-            while (!Validation.validateNumberOfPeople(numberPeople));
+            while (!Validation.validateNumberPeople(numberPeople));
             String styleRental;
             do {
                 styleRental = chooseRentalType();
@@ -183,7 +182,7 @@ public class FacilityServiceImpl implements IFacilityService {
                 System.out.println("Enter the number of floors of villa:");
                 numberFloors = Integer.parseInt(scanner.nextLine());
             }
-            while (!Validation.validateNumberOfFloor(numberFloors));
+            while (!Validation.validateNumberFloor(numberFloors));
             House house = new House(idService, nameService, useArea, rentalCosts, numberPeople, styleRental, roomStandard, numberFloors);
             List<House> houses = new ArrayList<>();
             houses.add(house);
@@ -225,7 +224,7 @@ public class FacilityServiceImpl implements IFacilityService {
                 System.out.println("Enter the number of people of villa: ");
                 numberPeople = Integer.parseInt(scanner.nextLine());
             }
-            while (!Validation.validateNumberOfPeople(numberPeople));
+            while (!Validation.validateNumberPeople(numberPeople));
             String styleRental;
             do {
                 styleRental = chooseRentalType();

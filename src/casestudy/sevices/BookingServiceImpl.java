@@ -17,8 +17,8 @@ public class BookingServiceImpl implements IBookingService {
     static Scanner scanner = new Scanner(System.in);
     static Set<Booking> listBooking = new TreeSet<>();
     static Queue<Booking> queueBooking = new LinkedList<>();
-    static Map<Facility, Integer> facilityIntegerMap = new LinkedHashMap<>();
-    static Set<Facility> keySet = facilityIntegerMap.keySet();
+    static  Map<Facility, Integer> facilityIntegerMap = ReadAndWrite.getFacilityMap("src\\casestudy\\data\\facility\\facilityMaintenance.csv");
+    static  Set<Facility> keySet = facilityIntegerMap.keySet();
     static final String HOUSE_PATH = "src\\casestudy\\data\\facility\\house.csv";
     static final String VILLA_PATH = "src\\casestudy\\data\\facility\\villa.csv";
     static final String ROOM_PATH = "src\\casestudy\\data\\facility\\room.csv";
@@ -172,6 +172,7 @@ public class BookingServiceImpl implements IBookingService {
     }
 
     public String getIdService() {
+
         int j = 1;
         System.out.println("List id of service: ");
         for (Facility key : keySet) {
